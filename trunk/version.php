@@ -8,7 +8,7 @@
  * @package skillmap
  **/
 
-$module->version  = 2009092701;  // The current module version (Date: YYYYMMDDXX)
+$module->version  = 2009092801;  // The current module version (Date: YYYYMMDDXX)
 $module->cron     = 0;           // Period for cron to check this module (secs)
 
 ?>
