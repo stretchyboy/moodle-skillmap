@@ -526,6 +526,7 @@ function skillmap_show_results($skillmap, $course, $cm, $allresponses, $forcepub
             echo "</tr>";
             
             /// Print "Select all" etc.
+						/*
             if ($viewresponses and has_capability('mod/skillmap:deleteresponses',$context)) {
                 echo '<tr><td></td><td>';
                 echo '<a href="javascript:select_all_in(\'DIV\',null,\'tablecontainer\');">'.get_string('selectall', 'quiz').'</a> / ';
@@ -539,7 +540,7 @@ function skillmap_show_results($skillmap, $course, $cm, $allresponses, $forcepub
                 echo '<script type="text/javascript">'."\n".'document.getElementById("noscriptmenuaction").style.display = "none";'."\n".'</script>';
                 echo '</td><td></td></tr>';
             }
-            
+            */
             echo "</table></div>";
             if ($viewresponses) {
                 echo "</form></div>";
