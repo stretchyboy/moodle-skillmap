@@ -536,7 +536,7 @@ function skillmap_show_results($skillmap, $course, $cm, $allresponses, $forcepub
                 echo '<noscript id="noscriptmenuaction" style="display: inline;">';
                 echo '<div>';
                 echo '<input type="submit" value="'.get_string('go').'" /></div></noscript>';
-                echo '<script type="text/javascript">'."\n<!--\n".'document.getElementById("noscriptmenuaction").style.display = "none";'."\n-->\n".'</script>';
+                echo '<script type="text/javascript">'."\n".'document.getElementById("noscriptmenuaction").style.display = "none";'."\n".'</script>';
                 echo '</td><td></td></tr>';
             }
             
