@@ -34,11 +34,20 @@ class mod_skillmap_mod_form extends moodleform_mod {
         $repeatarray[] = &MoodleQuickForm::createElement('hidden', 'optionid', 0);
 
 				
-				$menuoptions=array();
-        $menuoptions[1] = get_string('defaultsurvey', 'skillmap');
-        $mform->addElement('header', 'timerestricthdr', get_string('limit', 'skillmap'));
-        $mform->addElement('select', 'whichsurvey', get_string('whichsurvey', 'skillmap'), $menuoptions);
-        /*
+				
+				$mform->addElement('header', 'timerestricthdr', get_string('limit', 'skillmap'));
+				
+				
+				if($menu_survey = get_records_menu('skillmap_survey'))
+				{
+					$mform->addElement('select', 'survey', get_string('whichsurvey', 'skillmap'), $menu_survey);
+				}
+				
+				if ($menu_learningstage = get_records_menu('skillmap_learningstage'))
+				{
+					$mform->addElement('select', 'learningstage', get_string('whichlearningstage', 'skillmap'), $menu_learningstage);
+        }
+				/*
 				
         $menuoptions=array();
         $menuoptions[0] = get_string('disable');

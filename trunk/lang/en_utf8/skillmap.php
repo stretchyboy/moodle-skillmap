@@ -25,6 +25,7 @@ $string['havetologin'] = 'You have to log in before you can submit your skillmap
 $string['limit'] = 'Limit';
 $string['whichsurvey'] = 'Which survey to use';
 $string['defaultsurvey'] = 'Default survey';
+$string['whichlearningstage'] = 'Which Stage of Learning is this part of';
 
 $string['modulename'] = 'Skill map';
 $string['modulenameplural'] = 'Skill maps';

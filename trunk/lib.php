@@ -49,6 +49,7 @@ function skillmap_user_outline($course, $user, $mod, $skillmap) {
 
 
 function skillmap_user_complete($course, $user, $mod, $skillmap) {
+		$result = new stdClass;
     if ($responce = get_record('skillmap_answers', "skillmapid", $skillmap->id, "userid", $user->id)) {
         $result->info = "'".format_string(skillmap_get_option_text($skillmap, $responce->optionid))."'";
         $result->time = $responce->timemodified;
@@ -66,6 +67,11 @@ function skillmap_add_instance($skillmap) {
 // of the new instance.
 
     $skillmap->timemodified = time();
+		
+		if (empty($skillmap->timerestrict)) {
+        $skillmap->timeopen = 0;
+        $skillmap->timeclose = 0;
+    }
 		
     //insert answers
     if ($skillmap->id = insert_record("skillmap", $skillmap)) {
@@ -95,14 +101,14 @@ function skillmap_update_instance($skillmap) {
 // will update an existing instance with new data.
 
     $skillmap->id = $skillmap->instance;
-    /*$skillmap->timemodified = time();
+    $skillmap->timemodified = time();
 
 
     if (empty($skillmap->timerestrict)) {
         $skillmap->timeopen = 0;
         $skillmap->timeclose = 0;
     }
-
+		/*
     //update, delete or insert answers
     foreach ($skillmap->option as $key => $value) {
         $value = trim($value);
@@ -188,8 +194,13 @@ function skillmap_show_form($skillmap, $user, $cm, $allresponses) {
 						{
 							echo '<th align="center" scope="col">'.strip_tags($sSkillLevel).'</th>';
 						}
-						$sInterested = format_text($skillmap->survey_details->interested_label);
+						$sInterested = format_text($skillmap->survey_details->teach_question);
 						echo '<th align="center" scope="col">'.strip_tags($sInterested).'</th>';
+						
+						
+						$sInterested = format_text($skillmap->survey_details->learn_question);
+						echo '<th align="center" scope="col">'.strip_tags($sInterested).'</th>';
+						
 						
             echo "</tr>\n";    
 						
@@ -212,14 +223,12 @@ function skillmap_show_form($skillmap, $user, $cm, $allresponses) {
 							}
 							
 							echo "<td align=\"center\" valign=\"top\">";
-                echo "<input type=\"checkbox\" value=\"1\" name=\"interested_".$iSkillID."\"  alt=\"".strip_tags($sInterested)."\"". //$cd->checked.$cd->disabled.
-								" />";
-                /*if (!empty($cd->disabled)) {
-                    echo format_text($cd->text."<br /><strong>".get_string('full', 'skillmap')."</strong>");
-                } else {
-                    echo format_text($cd->text);
-                }*/
-                echo "</td>\n";
+                echo "<input type=\"checkbox\" value=\"1\" name=\"interested_".$iSkillID."\"  alt=\"".strip_tags($sInterested)."\" />"; //$cd->checked.$cd->disabled.
+							echo "</td>\n";
+							
+							echo "<td align=\"center\" valign=\"top\">";
+                echo "<input type=\"checkbox\" value=\"1\" name=\"teach_".$iSkillID."\"  alt=\"".strip_tags($sInterested)."\" />"; //$cd->checked.$cd->disabled.
+							echo "</td>\n";
 							
 							
 							echo "</tr>\n";
@@ -287,22 +296,22 @@ function skillmap_show_form($skillmap, $user, $cm, $allresponses) {
 function skillmap_user_submit_response($skillmap, $username, $courseid, $cm) {
 	global $USER;
 	
-  $responce = get_record('skillmap_responce', 'survey', $skillmap->survey, 'username', $username);
+  $responce = get_record('skillmap_responce', 'skillmap', $skillmap->id, 'username', $username);
 		
 		if(!$responce)
 		{
 			
 			$newresponce = $responce; //new Object();
 			$newresponce->username = $username;
-			$newresponce->survey = $skillmap->survey;
+			$newresponce->skillmap = $skillmap->id;
 			if (! insert_record("skillmap_responce", $newresponce)) {
                 error("Could not save your skillmap");
             }
-			$responce = get_record('skillmap_responce', 'survey', $skillmap->survey, 'username', $username);
+			$responce = get_record('skillmap_responce', 'skillmap', $skillmap->id, 'username', $username);
 		
 		}
 		
-		var_dump($responce);
+		//var_dump($responce);
 		
     $context = get_context_instance(CONTEXT_MODULE, $cm->id);
 
@@ -346,7 +355,7 @@ WHERE
 		*/
     //if (!($skillmap->limitanswers && ($countanswers >= $maxans) )) {
 		//"skilllevel_"
-		//"interested_"
+		//"teach_"
 								
 		foreach($skillmap->skill as $iSkillID => $sSkillName)						
 		{
@@ -356,10 +365,10 @@ WHERE
 			{
 			$current = get_record('skillmap_responce_skill', 'responce', $responce->id, 'skill', $iSkillID);
         if ($current) {
-
             $newanswer = $current;
             $newanswer->skilllevel = $iSkillLevel;
-						$newanswer->skilllevel = optional_param('interested_'.$iSkillID, '', PARAM_BOOL);
+						$newanswer->teach = optional_param('teach_'.$iSkillID, '', PARAM_BOOL);
+            $newanswer->learn = optional_param('learn_'.$iSkillID, '', PARAM_BOOL);
             $newanswer->timemodified = time();
             if (! update_record("skillmap_responce_skill", $newanswer)) {
                 error("Could not update your skillmap because of a database error");
@@ -370,8 +379,10 @@ WHERE
             $newanswer->responce = $responce->id;
             $newanswer->skill = $iSkillID;
           	$newanswer->skilllevel = $iSkillLevel;
-						$newanswer->interested = optional_param('interested_'.$iSkillID, '', PARAM_BOOL);
-            $newanswer->timemodified = time();
+						$newanswer->teach = optional_param('teach_'.$iSkillID, '', PARAM_BOOL);
+            $newanswer->learn = optional_param('learn_'.$iSkillID, '', PARAM_BOOL);
+            
+						$newanswer->timemodified = time();
             if (! insert_record("skillmap_responce_skill", $newanswer)) {
                 error("Could not save your skillmap");
             }
@@ -385,6 +396,11 @@ WHERE
 				}*/
 			}
 		}
+		$responce->timemodified = time();
+		if (! update_record("skillmap_responce", $responce)) {
+                error("Could not update your skillmap because of a database error");
+            }
+		
 }
 
 function skillmap_show_reportlink($user, $cm) {
@@ -661,8 +677,8 @@ function skillmap_delete_instance($id) {
 // Given an ID of an instance of this module,
 // this function will permanently delete the instance
 // and any data that depends on it.
-
-    if (! $skillmap = get_record("skillmap", "id", "$id")) {
+		$skillmap = get_record("skillmap", "id", "$id");
+    if (! $skillmap) {
         return false;
     }
 
@@ -703,7 +719,9 @@ function skillmap_get_participants($skillmapid) {
 
 function skillmap_get_option_text($skillmap, $id) {
 // Returns text string which is the answer that matches the id
-    if ($result = get_record("skillmap_options", "id", $id)) {
+//as in the name of the skill level used
+// TODO change this so that it works in our context
+    if ($result = get_record("skillmap_skilllevel", "skilllevel", $id)) {
         return $result->text;
     } else {
         return get_string("notanswered", "skillmap");
@@ -716,10 +734,10 @@ function skillmap_get_skillmap($skillmapid) {
 global $CFG, $USER;
 // Gets a full skillmap record
     if ($skillmap = get_record("skillmap", "id", $skillmapid)) {
-				// TODO: Get the  survey
+				// DONE: Get the  survey
 				if($skillmap->survey_details = get_record("skillmap_survey", "id", $skillmap->survey)){
 						// TODO: Add a max number of questions
-						// TODO: Add the only get the questions unanswered stuff in here
+						// DONE: Add the only get the questions unanswered stuff in here
 						// TODO: Add the skill map priority stuff in here
 						if ($options = get_records_sql("SELECT * FROM ". $CFG->prefix ."skillmap_skilllevel WHERE skilllevel IN (".$skillmap->survey_details->levels.")")){
 								foreach ($options as $option) {
@@ -729,14 +747,15 @@ global $CFG, $USER;
 								
 								$aSkillIDs = array();
 								
-								if ($responce = get_record('skillmap_responce', 'survey', $skillmap->survey, 'username', $USER->username)) {
-									if ($responces = get_records('skillmap_responce_skill', 'responce', $responce->id)) {
-										foreach($responces as $responceobject)
-										{
-											$aSkillIDs[] = $responceobject->skill;
-										}
+								
+								if ($responces = get_records_sql("SELECT s.* FROM ". $CFG->prefix ."skillmap_responce_skill s join ". $CFG->prefix ."skillmap_responce r on (s.responce = r.id) join ". $CFG->prefix ."skillmap m on (r.skillmap = m.id) WHERE m.learningstage=".$skillmap->learningstage." AND r.username=\"".$USER->username."\"")) 
+								{
+									foreach($responces as $responceobject)
+									{
+										$aSkillIDs[] = $responceobject->skill;
 									}
 								}
+								
 								
 								if(count($aSkillIDs))
 								{
@@ -847,7 +866,7 @@ function skillmap_get_response_data($skillmap, $cm, $groupmode) {
 		//mdl_skillmap_responce
 		
 		/// Get all the recorded responses for this skillmap
-		$rawresponses = get_records_sql("SELECT s.* FROM ".$CFG->prefix."skillmap_responce_skill s JOIN ".$CFG->prefix."skillmap_responce r ON (r.id = s.responce) WHERE survey = ".$skillmap->survey);
+		$rawresponses = get_records_sql("SELECT s.* FROM ".$CFG->prefix."skillmap_responce_skill s JOIN ".$CFG->prefix."skillmap_responce r ON (r.id = s.responce) WHERE skillmap = ".$skillmap->id);
 
 
 /// Use the responses to move users into the correct column
