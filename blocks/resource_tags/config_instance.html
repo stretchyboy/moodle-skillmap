@@ -1,0 +1,43 @@
+<?php
+    if (empty($this->config->title)) {
+        $this->config->title = get_string('resourcetags', 'resource');
+    }
+    if (empty($this->config->timewithin)) {
+        $this->config->timewithin = RESOURCEDEFAULTTIMEWITHIN;
+    }
+    if (empty($this->config->numberoftags)) {
+        $this->config->numberoftags = RESOURCEDEFAULTNUMBEROFTAGS;
+    }
+    if (empty($this->config->sort)) {
+        $this->config->sort = RESOURCEDEFAULTSORT;
+    }
+?>
+
+<table cellpadding="9" cellspacing="0" class="blockconfigtable">
+
+<tr valign="top">
+<td align="right"><?php print_string("blocktitle","resource") ?>:</td>
+<td><input type="text" name="title" size="50" value="<?php p($this->config->title) ?>" /></td>
+</tr>
+
+<tr valign="top">
+<td align="right"><?php print_string("numberoftags","resource") ?>:</td>
+<td><?php choose_from_menu($numberoftags,"numberoftags",$this->config->numberoftags) ?></td>
+</tr>
+
+<tr valign="top">
+<td align="right"><?php print_string("timewithin","resource") ?>:</td>
+<td><?php choose_from_menu($timewithin,"timewithin",$this->config->timewithin) ?></td>
+</tr>
+
+<tr valign="top">
+<td align="right"><?php print_string("tagsort","resource") ?>:</td>
+<td><?php choose_from_menu($sort,"sort",$this->config->sort) ?></td>
+</tr>
+
+<tr>
+    <td colspan="2" align="center"><input type="submit" value="<?php print_string("savechanges") ?>" /></td>
+</tr>
+
+</table>
+
