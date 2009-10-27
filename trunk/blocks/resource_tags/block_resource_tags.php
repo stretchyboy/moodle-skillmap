@@ -151,17 +151,17 @@ class block_resource_tags extends block_base {
                     break;
 
                     default:*/
-                        if (isset($COURSE->id) && $COURSE->id != SITEID) {
+                        /*if (isset($COURSE->id) && $COURSE->id != SITEID) {
                             $filtertype = 'course';
                             $filterselect = $COURSE->id;
-                        } else {
+                        } else {*/
                             $filtertype = 'site';
                             $filterselect = SITEID;
-                        }
+                       /* }
                 /*    break;
                 }
 								*/
-                $link = $CFG->wwwroot.'/resource/index.php?filtertype='.$filtertype.'&amp;filterselect='.$filterselect.'&amp;tagid='.$tag->id;
+                $link = $CFG->wwwroot.'/mod/resource/type/taggedfile/index.php?id='.$COURSE->id.'&amp;filtertype='.$filtertype.'&amp;filterselect='.$filterselect.'&amp;tagid='.$tag->id;
                 $this->content->text .= '<li><a href="'.$link.'" '.
                                         'class="'.$tag->class.'" '.
                                         'title="'.get_string('numberofentries','resource',$tag->ct).'">'.
