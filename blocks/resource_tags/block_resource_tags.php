@@ -4,7 +4,7 @@ define('RESOURCEDEFAULTTIMEWITHIN', 90);
 define('RESOURCEDEFAULTNUMBEROFTAGS', 20);
 define('RESOURCEDEFAULTSORT', 'name');
 
-//require_once($CFG->dirroot .'/resource/lib.php');
+require_once($CFG->dirroot .'/tag/lib.php');
 
 class block_resource_tags extends block_base {
     function init() {
