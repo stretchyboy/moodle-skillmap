@@ -149,7 +149,7 @@
     </STATEMENT>
     <STATEMENT NAME="insert_skillmap_survey" TYPE="insert" TABLE="skillmap_survey" COMMENT="Initial insert of records on table skillmap_survey" PREVIOUS="insert_skillmap_skilllevel" NEXT="insert_skillmap_skill">
       <SENTENCES>
-        <SENTENCE TEXT="(summary, levels, name, interested_label, interested_question) VALUES ('Digital Outreach Trainer - Pre Course Assessment','200,300,400', 'PCA', 'I could help other people','')" />
+        <SENTENCE TEXT="(summary, levels, name, teach_question, learn_question) VALUES ('Digital Outreach Trainer - Pre Course Assessment','200,300,400', 'PCA', 'I could help other people','I would like to learn more about this area')" />
       </SENTENCES>
 
     </STATEMENT>
