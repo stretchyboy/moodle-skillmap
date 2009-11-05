@@ -51,7 +51,6 @@ class resource_taggedfile extends resource_file {
 		
 		function setup_elements(&$mform)
 		{
-			echo "setup_elements";
 			global $CFG, $RESOURCE_WINDOW_OPTIONS;
 			
 			parent::setup_elements($mform);
