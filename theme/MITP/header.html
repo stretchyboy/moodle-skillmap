@@ -9,8 +9,8 @@
 <?php $id= optional_param('id', 0, PARAM_INT);?>
 <!-- Make sure that you have a my-styles.css file in your course's main folder-->
 <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot.'/file.php/'.$COURSE->id?>/my-styles.css" media="screen" />
-<script type="text/javascript" src="<?php echo $CFG->wwwroot ?>/javascript/jquery.js" ></script>
-<script type="text/javascript" src="<?php echo $CFG->wwwroot ?>/javascript/swfobject.js" ></script>
+<script type="text/javascript" src="<?php echo $CFG->themewww.'/'.current_theme(); ?>/javascript/jquery.js" ></script>
+<script type="text/javascript" src="<?php echo $CFG->themewww.'/'.current_theme(); ?>/javascript/swfobject.js" ></script>
 <script type="text/javascript">
 $(document).ready(function() {
 						   // expand panel
