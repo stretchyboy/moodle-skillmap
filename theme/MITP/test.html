@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="http://localhost/~martyn/moodle/theme/standard/styles.php" />
+<link rel="stylesheet" type="text/css" href="http://localhost/~martyn/moodle/theme/dot/styles.php" />
+<meta name="description" content="" />
+<!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="http://localhost/~martyn/moodle/theme/standard/styles_ie7.css" />
+<![endif]-->
+<!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="http://localhost/~martyn/moodle/theme/standard/styles_ie6.css" />
+<![endif]-->
+
+
+    <meta name="keywords" content="moodle, Making IT Personal " />
+    <title>Making IT Personal</title>
+
+    <link rel="shortcut icon" href="http://localhost/~martyn/moodle/theme/dot/favicon.ico" />
+    <!--<style type="text/css">/*<![CDATA[*/ body{behavior:url(http://localhost/~martyn/moodle/lib/csshover.htc);} /*]]>*/</style>-->
+
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/javascript-static.js"></script>
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/javascript-mod.php"></script>
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/overlib/overlib.js"></script>
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/overlib/overlib_cssstyle.js"></script>
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/cookies.js"></script>
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/ufo.js"></script>
+
+<script type="text/javascript" src="http://localhost/~martyn/moodle/lib/dropdown.js"></script>  
+
+<script type="text/javascript" defer="defer">
+//<![CDATA[
+setTimeout('fix_column_widths()', 20);
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+function openpopup(url,name,options,fullscreen) {
+  fullurl = "http://localhost/~martyn/moodle" + url;
+  windowobj = window.open(fullurl,name,options);
+  if (fullscreen) {
+     windowobj.moveTo(0,0);
+     windowobj.resizeTo(screen.availWidth,screen.availHeight);
+  }
+  windowobj.focus();
+  return false;
+}
+
+function uncheckall() {
+  void(d=document);
+  void(el=d.getElementsByTagName('INPUT'));
+  for(i=0;i<el.length;i++) {
+    void(el[i].checked=0);
+  }
+}
+
+function checkall() {
+  void(d=document);
+  void(el=d.getElementsByTagName('INPUT'));
+  for(i=0;i<el.length;i++) {
+    void(el[i].checked=1);
+  }
+}
+
+function inserttext(text) {
+  text = ' ' + text + ' ';
+  if ( opener.document.forms['theform'].message.createTextRange && opener.document.forms['theform'].message.caretPos) {
+    var caretPos = opener.document.forms['theform'].message.caretPos;
+    caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? text + ' ' : text;
+  } else {
+    opener.document.forms['theform'].message.value  += text;
+  }
+  opener.document.forms['theform'].message.focus();
+}
+
+function getElementsByClassName(oElm, strTagName, oClassNames){
+	var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
+	var arrReturnElements = new Array();
+	var arrRegExpClassNames = new Array();
+	if(typeof oClassNames == "object"){
+		for(var i=0; i<oClassNames.length; i++){
+			arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames[i].replace(/\-/g, "\\-") + "(\\s|$)"));
+		}
+	}
+	else{
+		arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames.replace(/\-/g, "\\-") + "(\\s|$)"));
+	}
+	var oElement;
+	var bMatchesAll;
+	for(var j=0; j<arrElements.length; j++){
+		oElement = arrElements[j];
+		bMatchesAll = true;
+		for(var k=0; k<arrRegExpClassNames.length; k++){
+			if(!arrRegExpClassNames[k].test(oElement.className)){
+				bMatchesAll = false;
+				break;
+			}
+		}
+		if(bMatchesAll){
+			arrReturnElements.push(oElement);
+		}
+	}
+	return (arrReturnElements)
+}
+//]]>
+</script>
+</head>
+
+<body  class="course course-1 notloggedin dir-ltr lang-en_utf8" id="site-index">
+
+<div id="page">
+<div id="toppanel">
+  <div id="panel" style="display: none;">
+
+    <div class="content clearfix">
+      <div class="left">
+        <h1>Welcome to DOTS</h1>
+        <h2>Please Login to your account here.</h2>
+        <p class="grey">We can add any messages. video, etc here</p>
+        <h2>Download</h2>
+      </div >
+
+      <div class="left">
+        <form method="post" action="profile.php" class="clearfix">
+          <h1 class="padlock">Member Login</h1>
+          <label for="log" class="grey">Username:</label>
+          <input type="text" size="23" id="log" name="log" class="field"/>
+          <label for="pwd" class="grey">Password:</label>
+          <input type="password" size="23" id="pwd" name="pwd" class="field"/>
+
+          <label>
+            <input type="checkbox" value="forever" checked="checked" id="rememberme" name="rememberme"/>
+             Remember me</label>
+          <div class="clear"/>
+          <input type="submit" class="bt_login" value="Login" name="submit"/>
+          <a href="#" class="lost-pwd">Lost your password?</a>
+        </form>
+      </div >
+
+      <div class="left right">
+        <form method="post" action="registration.php">
+          <h1>Become a DOT. Sign Up!</h1>
+          <label for="signup" class="grey">Username:</label>
+          <input type="text" size="23" id="username" name="username" class="field"/>
+          <label for="email" class="grey">Email:</label>
+          <input type="text" size="23" id="email" name="email" class="field"/>
+
+          <label>A password will be e-mailed to you.</label>
+          <input type="submit" class="bt_register" value="Register" name="submit"/>
+        </form>
+      </div >
+    </div >
+		
+  </div >
+  <div class="tab">
+    <ul class="login">
+
+      <li class="left"> </li>
+      <li>Hello Guest!</li>
+      <li class="sep">|</li>
+      <li id="toggle"><a href="#" class="open" id="open" style="display: block;">Log In | Register</a> <a href="#" class="close" style="display: none;" id="close">Close Panel</a> </li>
+      <li class="right"> </li>
+
+    </ul>
+  </div >
+</div >
+<!--</div >this one is a hack the tag not closing properly some how-->
+
+    <div id="header" class=" clearfix">		<!--<div id="header-home" class=" clearfix">-->
+        <h1 class="headermain">Making IT Personal</h1>
+        <div class="headermenu"><div class="logininfo">You are not logged in. (<a  href="http://localhost/~martyn/moodle/login/index.php">Login</a>)</div ><form action="http://localhost/~martyn/moodle/course/jumpto.php" method="get"  id="chooselang" class="popupform"><div><label for="chooselang_jump"><span class="accesshide " >Language</span></label><select id="chooselang_jump" name="jump" onchange="self.location=document.getElementById('chooselang').jump.options[document.getElementById('chooselang').jump.selectedIndex].value;">
+
+   <option value="http://localhost/~martyn/moodle/index.php?lang=en_utf8" selected="selected">English (en)</option>
+</select><input type="hidden" name="sesskey" value="05x2J1qTUA" /><div id="noscriptchooselang" style="display: inline;"><input type="submit" value="Go" /></div ><script type="text/javascript">
+//<![CDATA[
+document.getElementById("noscriptchooselang").style.display = "none";
+//]]>
+</script></div ></form></div >
+    </div >        <hr />
+    <!-- END OF HEADER -->
+    <div id="content">
+
+<table id="layout-table" summary="layout">
+  <tr>
+  <td id="middle-column"><span id="maincontent"></span><div><div class="generalbox sitetopic box">
+
+<ul>
+  <li>Do you feel that you know how to find what you want on the web?</li>
+  <li>Can you usually figure out how technical things (like mobile phones, digital cameras) work?</li>
+  <li>Are you the sort of person that gets asked for help with technologies?</li>
+  <li>Do you enjoy helping other people to get to grips with technologies and the web?</li>
+</ul>
+<p>If you have answered YES to these questions, then you may like become a volunteer on the new South Yorkshire DOT (Digital Outreach Trainer) Scheme.</p>
+<h3>What is the DOT Scheme?</h3>
+
+<p>The aim of the scheme is to improve digital literacy in the South Yorkshire region. One way to do this is to tap into the skills that people like you already have, and encourage them to help their friends, neighbours, colleagues and relatives to become more confident and more skilled using technologies, and finding what they want on the web.</p>
+<h3>What sort of volunteers are needed?</h3>
+<p>You don’t have to be a technical expert - you just need to be someone who likes to use technologies and the web, and is willing to help other people.</p>
+<h3>What’s in it for you?</h3>
+<p>There are quite a few benefits for you if you become a DOT:</p>
+<ul>
+  <li>You get the satisfaction of helping others become more confident with technology</li>
+  <li>You will join a network of other DOTs to get mutual support and advice</li>
+
+  <li>You will get access to free courses and tutorials, to improve your skills and to gain qualifications</li>
+  <li>You will get a DOT Certificate which shows you have participated in the scheme</li>
+</ul>
+<h3>How does it work?</h3>
+<ul>
+  <li>You first complete a very short online form, which will register you as a DOT.</li>
+  <li>When you give help to other people, you record what you have done on the DOT website, and this record can be used for one of the qualifications available to you (The DOT Qualification)</li>
+  <li>You will be joined to an online forum, where you can network with other DOTs, and exchange experiences and ideas, ask questions, and answer the questions of others</li>
+
+</ul> </div ><br /></div ></td>
+  </tr>
+</table>
+
+</div ><div id="footer"><p class="helplink"></p><div class="logininfo">You are not logged in. (<a  href="http://localhost/~martyn/moodle/login/index.php">Login</a>)</div ><div class="sitelink"><a title="Moodle 1.9.4 (Build: 20090128)" href="http://moodle.org/"><img style="width:100px;height:30px" src="pix/moodlelogo.gif" alt="moodlelogo" /></a></div ></div >
+</div >
+</body>
+</html>
+
