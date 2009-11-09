@@ -9,7 +9,7 @@ require_once($CFG->dirroot .'/tag/lib.php');
 class block_resource_tags extends block_base {
     function init() {
         $this->version = 2007101509;
-        $this->title = get_string('blocktagstitle', 'resource');
+        $this->title = get_string('blocktagstitle', 'resource_taggedfile');
     }
 
     function instance_allow_multiple() {
@@ -32,7 +32,7 @@ class block_resource_tags extends block_base {
 
         // load userdefined title and make sure it's never empty
         if (empty($this->config->title)) {
-            $this->title = get_string('blocktagstitle','resource');
+            $this->title = get_string('blocktagstitle','resource_taggedfile');
         } else {
             $this->title = $this->config->title;
         }
@@ -192,8 +192,8 @@ class block_resource_tags extends block_base {
 
     /// set up sort select field
         $sort = array();
-        $sort['name'] = get_string('tagtext', 'resource');
-        $sort['id']   = get_string('tagdatelastused', 'resource');
+        $sort['name'] = get_string('tagtext', 'resource_taggedfile');
+        $sort['id']   = get_string('tagdatelastused', 'resource_taggedfile');
 
 
         if (is_file($CFG->dirroot .'/blocks/'. $this->name() .'/config_instance.html')) {

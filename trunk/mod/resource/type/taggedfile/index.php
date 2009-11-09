@@ -14,8 +14,9 @@
     }
     add_to_log($course->id, "resource", "view tagged", "index.php?id=$course->id", "");
 
-    $strresource = get_string("modulename", "resource");
-    $strresources = get_string("modulenameplural", "resource");
+    $strresource = get_string("modulename", 'resource_taggedfile');
+    
+    $strresources = get_string("modulenameplural", 'resource_taggedfile');
     $strweek = get_string("week");
     $strtopic = get_string("topic");
     $strname = get_string("name");
