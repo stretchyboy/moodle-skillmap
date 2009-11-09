@@ -63,7 +63,7 @@ $(this).removeClass("subhover"); //On hover out, remove class "subhover"
       </div>
       <div class="left">
         <!--<form method="post" action="profile.php" class="clearfix">-->
-        <form id="login" class="loginform" action="http://localhost/mitp/login/index.php" method="post">
+        <form id="login" class="loginform" action="<?php echo $CFG->wwwroot;?>/login/index.php" method="post">
           <h1 class="padlock">Member Login</h1>
           <label for="log" class="grey">Username:</label>
           <input id="login_username" type="text" name="username" class="field"/>
@@ -79,7 +79,7 @@ $(this).removeClass("subhover"); //On hover out, remove class "subhover"
         </form>
       </div>
       <div class="left right">
-        <form method="post" action="<?php echo $CFG->wwwroot?>/login/signup.php">
+        <form method="post" action="<?php echo $CFG->wwwroot;?>/login/signup.php">
           <h1>Become a DOT. Sign Up!</h1>
           <label for="signup" class="grey">Username:</label>
           <input type="text" size="23" id="username" name="username" class="field"/>
