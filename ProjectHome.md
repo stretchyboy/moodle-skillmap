@@ -1,0 +1,1 @@
+Plugin for moodle, provides a flexible skills questionnaire for volunteering and mentoring. And tools to provide bitesized tutorials based on the answers.
